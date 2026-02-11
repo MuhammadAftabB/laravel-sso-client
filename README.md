@@ -1,6 +1,10 @@
-# liqwiz/laravel-sso-client
+# Laravel SSO Client
 
 Laravel package that turns your app into an SSO client. Authenticate users against a central **SSO Hub** (OAuth2 IdP) and keep authorization (roles/permissions) local.
+
+**Repository:** [github.com/MuhammadAftabB/laravel-sso-client](https://github.com/MuhammadAftabB/laravel-sso-client)
+
+---
 
 ## Requirements
 
@@ -8,12 +12,38 @@ Laravel package that turns your app into an SSO client. Authenticate users again
 - Laravel 10, 11, or 12
 - An SSO Hub that implements the [Hub API](#hub-api) (install token + register-client + userinfo)
 
+---
+
 ## Installation
 
 ### 1. Install the package
 
+**From Packagist (after the package is published):**
+
 ```bash
 composer require liqwiz/laravel-sso-client
+```
+
+**From GitHub (development):**
+
+```bash
+composer require liqwiz/laravel-sso-client dev-main
+```
+
+Or add to `composer.json` and run `composer update`:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/MuhammadAftabB/laravel-sso-client"
+        }
+    ],
+    "require": {
+        "liqwiz/laravel-sso-client": "dev-main"
+    }
+}
 ```
 
 ### 2. One-command setup
@@ -63,12 +93,15 @@ Protected routes: use `auth` middleware as usual. To **deny users with no local 
 | `client_id`                 | `SSO_CLIENT_ID`     | OAuth client ID from Hub                           |
 | `client_secret`             | `SSO_CLIENT_SECRET` | OAuth client secret                                |
 | `redirect_uri`              | `SSO_REDIRECT_URI`  | Callback URL (e.g. `APP_URL/sso/callback`)         |
+| `routes.prefix`             | -                   | Route prefix (default: `sso`)                      |
 | `user.model`                | -                   | Your User model class                              |
 | `gate.enabled`              | -                   | Enable Access Gate (default: true)                 |
-| `gate.deny_if_no_role`      | -                   | Deny if user has no role (default: true)           |
-| `gate.required_roles`       | -                   | Require at least one of these roles (Spatie)       |
-| `gate.required_permissions` | -                   | Require at least one of these permissions (Spatie) |
+| `gate.deny_if_no_role`      | -                   | Deny if user has no role (default: true)          |
+| `gate.required_roles`       | -                   | Require at least one of these roles (Spatie)        |
+| `gate.required_permissions` | -                   | Require at least one of these permissions (Spatie)  |
 | `gate.custom_callback`      | -                   | Custom callable for access check                   |
+| `gate.deny_message`         | -                   | Message shown when access is denied                 |
+| `gate.deny_redirect`        | -                   | Redirect path when access is denied (default: `/login`) |
 
 ### Access Gate
 
@@ -95,8 +128,8 @@ If the user fails the gate: they are logged out, session is invalidated, and the
 The Hub must provide:
 
 1. **POST /api/sso/install-tokens** (auth required) – returns a one-time install token.
-2. **POST /api/sso/register-client** – body: `install_token`, `name`, `app_url`, `redirect_uri`; returns `hub_url`, `authorize_url`, `token_url`, `userinfo_url`, `client_id`, `client_secret`.
-3. **GET /api/sso/userinfo** (OAuth2 Bearer) – returns `sub`, `email`, `name`, `avatar_url?`, `updated_at?`.
+2. **POST /api/sso/register-client** – body: `install_token`, `name`, `app_url`, `redirect_uri`; returns `client_id`, `client_secret`.
+3. **GET /api/sso/userinfo** (OAuth2 Bearer) – returns `sub`, `email`, `name` (and optionally `avatar_url`, `updated_at`).
 
 OAuth2: Authorization Code grant; authorize at `{hub}/oauth/authorize`, token at `{hub}/oauth/token`.
 
@@ -113,6 +146,10 @@ OAuth2: Authorization Code grant; authorize at `{hub}/oauth/authorize`, token at
 
 - `SSO_REDIRECT_URI` must be exactly the callback URL the Hub uses (e.g. `https://yourapp.com/sso/callback`).
 - In production the Hub typically requires `redirect_uri` to use **https** and to match the app’s origin.
+
+### Invalid state / Session lost
+
+- If the Hub and client run on the **same domain** (e.g. different ports on localhost), use a **unique session cookie name** in the client’s `.env` (e.g. `SESSION_COOKIE=my_client_session`) so the Hub does not overwrite the client’s session.
 
 ### invalid_client / Token exchange failed
 
@@ -132,4 +169,4 @@ OAuth2: Authorization Code grant; authorize at `{hub}/oauth/authorize`, token at
 
 ## License
 
-MIT.
+MIT. See the [repository](https://github.com/MuhammadAftabB/laravel-sso-client) for details.
