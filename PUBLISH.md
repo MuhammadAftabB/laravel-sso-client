@@ -1,6 +1,6 @@
 # How to register this package on Packagist / Composer
 
-Follow these steps so others can install the package with `composer require liqwiz/laravel-sso-client`.
+Follow these steps so others can install the package with `composer require MuhammadAftabB/laravel-sso-client`.
 
 ---
 
@@ -29,7 +29,7 @@ Or do it manually: create a new repo (e.g. `laravel-sso-client`), copy the conte
 
 ## 2. Update composer.json
 
-- **Package name:** Must be unique on Packagist. If you use a different vendor (e.g. `yourcompany`), use `yourcompany/laravel-sso-client`. The current name is `liqwiz/laravel-sso-client` — keep it if you want to use the "liqwiz" namespace.
+- **Package name:** Must be unique on Packagist. The package name is `MuhammadAftabB/laravel-sso-client` (vendor/package).
 - **authors:** Use your real name and email (they are shown publicly on Packagist).
 - **homepage / support (optional):** Add your GitHub repo URL.
 
@@ -60,7 +60,7 @@ Example (edit to match your details):
 6. Click **Submit**.  
 7. The package is now public. Anyone can install it with:  
    ```bash
-   composer require liqwiz/laravel-sso-client
+   composer require MuhammadAftabB/laravel-sso-client
    ```
 
 ---
@@ -80,7 +80,7 @@ To have Packagist update the package on every push:
 
 ## 5. Create a version tag (release)
 
-`composer require liqwiz/laravel-sso-client` will resolve to the **latest stable** version. For that you need at least one **version tag**:
+`composer require MuhammadAftabB/laravel-sso-client` will resolve to the **latest stable** version. For that you need at least one **version tag**:
 
 ```bash
 cd /path/to/laravel-sso-client-repo
@@ -103,7 +103,7 @@ Packagist will treat this as version 1.0.0. For future releases, push tags like 
 After that, the package can be installed in any Laravel project with:
 
 ```bash
-composer require liqwiz/laravel-sso-client
+composer require MuhammadAftabB/laravel-sso-client
 ```
 
 (once the package is public on Packagist).

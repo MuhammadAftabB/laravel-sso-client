@@ -1,5 +1,5 @@
 {
-    "name": "liqwiz/laravel-sso-client",
+    "name": "MuhammadAftabB/laravel-sso-client",
     "description": "Laravel SSO client package - turn any Laravel app into an SSO client using a Hub (OAuth2 IdP)",
     "keywords": ["laravel", "sso", "oauth", "single sign-on", "passport"],
     "license": "MIT",
