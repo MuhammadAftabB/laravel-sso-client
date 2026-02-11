@@ -21,13 +21,13 @@ Laravel package that turns your app into an SSO client. Authenticate users again
 **From Packagist (after the package is published):**
 
 ```bash
-composer require muhammad-aftab-b/laravel-sso-client
+composer require muhammadaftab/laravel-sso-client
 ```
 
 **From GitHub (development):**
 
 ```bash
-composer require muhammad-aftab-b/laravel-sso-client dev-main
+composer require muhammadaftab/laravel-sso-client dev-main
 ```
 
 Or add to `composer.json` and run `composer update`:
@@ -41,7 +41,7 @@ Or add to `composer.json` and run `composer update`:
         }
     ],
     "require": {
-        "muhammad-aftab-b/laravel-sso-client": "dev-main"
+        "muhammadaftab/laravel-sso-client": "dev-main"
     }
 }
 ```
