@@ -9,6 +9,11 @@
             "email": "dev@example.com"
         }
     ],
+    "homepage": "https://github.com/MuhammadAftabB/laravel-sso-client",
+    "support": {
+        "issues": "https://github.com/MuhammadAftabB/laravel-sso-client/issues",
+        "source": "https://github.com/MuhammadAftabB/laravel-sso-client"
+    },
     "require": {
         "php": "^8.2",
         "illuminate/support": "^10.0|^11.0|^12.0",
